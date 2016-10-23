@@ -1,7 +1,7 @@
 /*
     The MIT License (MIT)
     
-    FTL-Lang Copyright (c) 2016 thoma
+    FTL-Compiler Copyright (c) 2016 thoma
     
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
@@ -22,33 +22,21 @@
     SOFTWARE.
 */
 
-@file:JvmName("Main")
+package com.thomas.needham.ftl.frontend
 
-package com.thomas.needham.ftl
+/**
+ * Class to represent a single Token outputted by the Lexer
+ */
+class Token {
+    val value : String
+    val type : EnumTokenTypes.Types
 
-import com.thomas.needham.ftl.Utils.ReadAllText
-import com.thomas.needham.ftl.frontend.Lexer
-import java.io.File
-
-data class Arguments(val inputFile: String, val outputFile: String)
-
-fun main(args: Array<String>) : Unit {
-    println("FTL Language Compiler Helping You Code Faster Than Light!")
-    if(args.size >= 2) { // TODO Parse Arguments
-        for (i : Int in 0..args.size - 1) {
-            println("args[${i}] = ${args[i]}")
-        }
-        val arguments : Arguments = Arguments(args.first(), args.last())
-        val lexer : Lexer = Lexer(ReadAllText(File(arguments.inputFile)))
-        if(!lexer.tokeniseSourceCode()){
-            System.err.println("Error Lexing File: ${arguments.inputFile}")
-            return
-        }
-        lexer.printTokens()
-        println("File Lexed Successfully ${arguments.inputFile}")
+    constructor(value: String, type: EnumTokenTypes.Types){
+        this.value = value
+        this.type = type
     }
-    else{
-        println("Invalid Arguments")
-        return
+
+    override fun toString(): String {
+        return value + " : " + type.name
     }
 }

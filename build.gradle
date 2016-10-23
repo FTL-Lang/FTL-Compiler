@@ -31,9 +31,10 @@ task wrapper(type: Wrapper) {
 }
 
 buildscript {
-    ext.kotlin_version = '1.0.4'
+    ext.kotlin_version = '1.1-M02'
 
     repositories {
+        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap-1.1/' }
         mavenCentral()
         jcenter()
     }
@@ -61,6 +62,7 @@ mainClassName = "com.thomas.needham.ftl.Main"
 sourceCompatibility = 1.6
 
 repositories {
+    maven { url 'https://dl.bintray.com/kotlin/kotlin-eap-1.1/' }
     mavenCentral()
     jcenter()
 }
@@ -75,3 +77,5 @@ shadowJar {
     classifier = group
     version = '0.1'
 }
+
+// Test Run Args = -PcmdArgs=test.warp,test.class
