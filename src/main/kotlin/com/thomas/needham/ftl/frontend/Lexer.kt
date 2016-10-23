@@ -23,10 +23,9 @@
 */
 package com.thomas.needham.ftl.frontend
 
-import com.sun.org.apache.xpath.internal.operations.Bool
-import com.thomas.needham.neurophidea.Tuple3
-import kotlin.reflect.KFunction
-import kotlin.reflect.jvm.reflect
+import com.thomas.needham.ftl.Tuple3
+
+typealias StackFrame = Tuple3<Int, StringBuilder, Array<Char>>
 
 class Lexer {
     val sourceString : String
@@ -81,7 +80,7 @@ class Lexer {
             tokenRegistry.registerToken(token)
     }
 
-    private fun TerminateString(index: Int, currentToken: StringBuilder, sourceChars: Array<Char>): Tuple3<Int,StringBuilder, Array<Char>>? {
+    private fun TerminateString(index: Int, currentToken: StringBuilder, sourceChars: Array<Char>): StackFrame? {
         var pIndex : Int = index
         val pCurrentToken : StringBuilder = currentToken
         val pSourceChars : Array<Char> = sourceChars
@@ -96,7 +95,7 @@ class Lexer {
                 }
             }
         }
-        return Tuple3(pIndex, pCurrentToken, pSourceChars)
+        return StackFrame(pIndex, pCurrentToken, pSourceChars)
     }
 
     private fun isControlCharacter(ch: Char) : Boolean {
