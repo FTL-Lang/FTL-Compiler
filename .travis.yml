@@ -3,4 +3,6 @@ language: java
 sudo: required
 
 jdk:
-- oraclejdk6
+- openjdk6
+- opraclejdk7
+- opraclejdk8
