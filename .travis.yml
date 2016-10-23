@@ -4,5 +4,5 @@ sudo: required
 
 jdk:
 - openjdk6
-- opraclejdk7
-- opraclejdk8
+- oraclejdk7
+- oraclejdk8
