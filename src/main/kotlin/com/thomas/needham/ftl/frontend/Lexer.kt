@@ -115,7 +115,7 @@ class Lexer {
     }
 
     /**
-     * Function to terminate multi word string literals i.e literals containing spaces
+     * Function to evaluate string literals i.e literals containing spaces and escaped characters
      * @param index index of the char currently being read
      * @param currentToken the value of the current token
      * @param sourceChars the source code currently being lexed

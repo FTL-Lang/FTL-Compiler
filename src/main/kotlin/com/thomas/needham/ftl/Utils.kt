@@ -26,9 +26,10 @@ package com.thomas.needham.ftl
 import java.io.*
 
 /**
- * Created by thoma on 22/10/2016.
+ * Static object containing useful utility functions which are accessible from the global scope
  */
 object Utils {
+
     @JvmStatic inline fun <reified INNER> array2d(sizeOuter: Int, sizeInner: Int, noinline innerInit: (Int) -> INNER) : Array<Array<INNER>> = Array(sizeOuter) { Array<INNER>(sizeInner, innerInit) }
     @JvmStatic fun array2dOfInt(sizeOuter: Int, sizeInner: Int) : Array<IntArray> = Array(sizeOuter) { IntArray(sizeInner) }
     @JvmStatic fun array2dOfShort(sizeOuter: Int, sizeInner: Int) : Array<ShortArray> = Array(sizeOuter) { ShortArray(sizeInner) }
@@ -39,6 +40,13 @@ object Utils {
     @JvmStatic fun array2dOfDouble(sizeOuter: Int, sizeInner: Int) : Array<DoubleArray> = Array(sizeOuter) { DoubleArray(sizeInner) }
     @JvmStatic fun array2dOfBoolean(sizeOuter: Int, sizeInner: Int) : Array<BooleanArray> = Array(sizeOuter) { BooleanArray(sizeInner) }
 
+    typealias StackFrame = Tuple3<Int, StringBuilder, Array<Char>>
+
+    /**
+     * Returns a binary files contents
+     * @param path the path of the file to return
+     * @return The Contents of the file
+     */
     @Throws(IOException::class)
     @JvmStatic fun fileToString(path: String) : String {
         val builder = StringBuilder()
@@ -56,7 +64,14 @@ object Utils {
 
         return builder.toString()
     }
-
+    /**
+     * Returns a text files contents
+     * @param path the path of the file to return
+     * @return The Contents of the file
+     * @throws IOException
+     * @throws FileNotFoundException
+     */
+    @Throws(IOException::class, FileNotFoundException::class)
     fun ReadAllText(file: File) : String{
         if(file.isDirectory || !file.canRead()){
             throw FileNotFoundException("Invalid File: ${file.path}")
@@ -70,6 +85,12 @@ object Utils {
         fr.close()
         return contents
     }
+
+    /**
+     * Extension method for Double that safely tries to parse a double
+     * @param value the value to parse
+     * @return true if the parse succeeded false if the parse failed
+     */
     fun Double.Companion.TryParse(value: String) : Boolean { // Companion is required to make TryParse Static
         try {
             value.toDouble()

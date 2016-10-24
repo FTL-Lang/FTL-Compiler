@@ -23,18 +23,38 @@
 */
 package com.thomas.needham.ftl.frontend
 
-/**
- * Created by thoma on 22/10/2016.
- */
 import com.thomas.needham.ftl.Utils.TryParse
-class TokenRegistry {
 
+/**
+ * Class to manage all of the tokens that are predefined within the compiler
+ * such as Keywords, Types, Operators, etc. And also all of the tokens produced by the Lexer
+ * when lexing a source file
+ * @author Tom Needham (06needhamt)
+ * @see Lexer
+ */
+class TokenRegistry {
+    /**
+     * Companion object of Token Registry to contain all static functions and variables
+     */
     companion object StaticData {
+        /**
+         * Initialisation lambda for Array<Token>
+         */
         @JvmStatic val tokenArrayInit: (Int) -> Token = {
             Token("NULL", EnumTokenTypes.Types.UNKNOWN_TOKEN)
         }
     }
+
+    /**
+     * Mutable list to contain all tokens outputted by the Lexer
+     * @see Lexer
+     */
     val registeredTokens : MutableList<Token>
+
+    /**
+     * Immutable list to contain all all of the tokens that are predefined within the compiler
+     * such as Keywords, Types, Operators, etc.
+     */
     val predefinedTokens : Array<Token> = arrayOf<Token>(
             Token("class", EnumTokenTypes.Types.KEYWORD_TOKEN),
             Token("while", EnumTokenTypes.Types.KEYWORD_TOKEN),
@@ -93,29 +113,39 @@ class TokenRegistry {
             Token("\u0000", EnumTokenTypes.Types.END_OF_FILE_TOKEN)
     )
 
+    /**
+     * Constructor For the TokenRegistry
+     */
     constructor(){
         registeredTokens = mutableListOf<Token>()
     }
 
+    /**
+     * Function to add a Token into the TokenRegistry
+     * @param value The string value of the token to be added
+     * @return Whether the Token was successfully added to the TokenRegistry
+     * @see Token
+     */
     fun registerToken(value: String) : Boolean{
-        var temp : Token? = predefinedTokens.firstOrNull { x ->
+        var temp : Token? = predefinedTokens.firstOrNull { x -> // Is The Token Already present in the registry
             x.value == value
         }
-        if(temp != null){
-            registeredTokens.add(temp)
+        if(temp != null){ // if the token is already present
+            registeredTokens.add(temp) // just add it to the registry no need to resolve it's type
         }
-        else{
-            if(Double.TryParse(value))
+        else{ // if the token is not already present
+            if(Double.TryParse(value)) // is it a valid numeric literal
                 temp = Token(value, EnumTokenTypes.Types.INTEGER_LITERAL)
-            else if(value.startsWith("\"") && value.endsWith("\""))
+            else if(value.startsWith("\"") && value.endsWith("\"")) // is it a valid string literal
                 temp = Token(value, EnumTokenTypes.Types.STRING_LITERAL)
-            else if(!value.isNullOrEmpty() && !value.isNullOrBlank())
+            else if(!value.isNullOrEmpty() && !value.isNullOrBlank()) // is it a valid identifier
                 temp = Token(value, EnumTokenTypes.Types.IDENTIFIER_TOKEN)
             else{
                 System.err.println("ERROR: Found Unknown Token: ${value}")
+                // We have found an unknown token N.B This should never happen
                 return false
             }
-            registeredTokens.add(temp)
+            registeredTokens.add(temp) // the token has been resolved add it to the registry
         }
         return true
     }
