@@ -88,6 +88,7 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     compile "org.jetbrains.kotlin:kotlin-runtime:$kotlin_version"
+    //compile "com.hackoeur:jglm:1.0.0"
     testCompile 'io.kotlintest:kotlintest:1.3.5'
     testRuntime 'org.slf4j:slf4j-nop:1.7.12'
 }
@@ -97,4 +98,4 @@ shadowJar {
     version = '0.1'
 }
 
-// Test Run Args = -PcmdArgs=test.warp,test.class
+// Test Run Args = -PcmdArgs=examples/SyntaxTest.warp,examples/SyntaxTest.class
