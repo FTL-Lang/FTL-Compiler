@@ -31,7 +31,7 @@ class EnumTokenTypes{
     /**
      * Enum containing a list of token types
      */
-    enum class Types (value: Int){
+    enum class Types (val value: Int){
         KEYWORD_TOKEN (1.shl(0)),
         OPERATOR_TOKEN (1.shl(1)),
         LEFT_BRACE_TOKEN (1.shl(2)),

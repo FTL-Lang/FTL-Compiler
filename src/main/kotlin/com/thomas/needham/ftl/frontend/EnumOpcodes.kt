@@ -30,7 +30,7 @@ public class EnumOpcodes {
     /**
      * Enum containing a list of JVM Opcodes
      */
-    enum class Opcodes(value: Int) {
+    enum class Opcodes(val value: Int) {
         aaload(0x32),
         aastore(0x53),
         aconst_null(0x01),
