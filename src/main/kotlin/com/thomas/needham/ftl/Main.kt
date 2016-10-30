@@ -33,10 +33,10 @@ import java.io.File
 
 
 fun main(args: Array<String>) : Unit {
-    println("FTL Language Compiler Helping You Code Faster Than Light!")
+    Logger.printMessage("FTL Language Compiler Helping You Code Faster Than Light!")
     if(args.size >= 2) { // TODO Parse Arguments
         for (i : Int in 0..args.size - 1) {
-            println("args[${i}] = ${args[i]}")
+            Logger.printMessage("args[${i}] = ${args[i]}")
         }
         val arguments : CommandLineArguments = CommandLineArguments(args.first(), args.last())
         val lexer : Lexer = Lexer(SourceFile(File(arguments.inputFile)))
@@ -45,10 +45,10 @@ fun main(args: Array<String>) : Unit {
             return
         }
         lexer.printTokens()
-        println("File Lexed Successfully ${arguments.inputFile}")
+        Logger.printMessage("File Lexed Successfully ${arguments.inputFile}")
     }
     else{
-        println("Invalid Arguments")
+        Logger.printMessage("Invalid Arguments")
         return
     }
 }

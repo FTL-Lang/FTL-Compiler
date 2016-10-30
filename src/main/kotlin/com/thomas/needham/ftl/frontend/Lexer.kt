@@ -23,6 +23,7 @@
 */
 package com.thomas.needham.ftl.frontend
 
+import com.thomas.needham.ftl.Logger
 import com.thomas.needham.ftl.Utils.EvaluateStringParams
 
 /**
@@ -215,7 +216,7 @@ class Lexer {
         val list: MutableList<String> = mutableListOf()
         for (token: Token in tokenRegistry.registeredTokens) {
             list.add(token.toString())
-            println(token.toString())
+            Logger.printMessage(token.toString())
         }
         return list
     }
