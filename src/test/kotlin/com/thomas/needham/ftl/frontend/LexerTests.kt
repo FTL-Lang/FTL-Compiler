@@ -24,13 +24,14 @@
 package com.thomas.needham.ftl.frontend
 
 import io.kotlintest.specs.FeatureSpec
+import java.io.File
 
 class LexerTests : FeatureSpec() {
     val correctSourceCode: String = "func main -> () -> int {" +
-            "\n println(\"Hello World \\\"Escape Test!\\\" 'After Escapeed Quotes'\") // This is a comment\n" +
+            "\n println(\"Hello World \\\"Escape Test!\\\" 'After Escaped Quotes'\") // This is a comment\n" +
             "return 0\n }"
     val unterminatedString: String = "func main -> () -> int {" +
-            "\n println(\"Hello World \\\"Escape Test!\\\" 'After Escapeed Quotes') // This is a comment\n" +
+            "\n println(\"Hello World \\\"Escape Test!\\\" 'After Escaped Quotes') // This is a comment\n" +
             "return 0\n }"
     val correctTokens: List<String> = arrayOf<String>(
             "func : KEYWORD_TOKEN",
@@ -43,7 +44,7 @@ class LexerTests : FeatureSpec() {
             "{ : LEFT_BRACE_TOKEN",
             "println : IDENTIFIER_TOKEN",
             "( : LEFT_PAREN_TOKEN",
-            "\"Hello World \"Escape Test!\" 'After Escapeed Quotes'\" : STRING_LITERAL",
+            "\"Hello World \"Escape Test!\" 'After Escaped Quotes'\" : STRING_LITERAL",
             "return : KEYWORD_TOKEN",
             "0 : INTEGER_LITERAL",
             "} : RIGHT_BRACE_TOKEN",
@@ -53,17 +54,17 @@ class LexerTests : FeatureSpec() {
     init {
         feature("The Source Tokenizer") {
             scenario("Should Successfully Tokenize This Code ${correctSourceCode}") {
-                val lexer: Lexer = Lexer(correctSourceCode)
+                val lexer: Lexer = Lexer(SourceFile(File("testdata/lexer/correct.warp")))
                 lexer.tokeniseSourceCode().shouldBe(true)
             }
 
             scenario("Should Error On Unterminated String") {
-                val lexer: Lexer = Lexer(unterminatedString)
+                val lexer: Lexer = Lexer(SourceFile(File("testdata/lexer/unterminated.warp")))
                 lexer.tokeniseSourceCode().shouldBe(false)
             }
 
             scenario("Should Print The Following Tokens ${correctTokens.forEach { println(it) }}") {
-                val lexer: Lexer = Lexer(correctSourceCode)
+                val lexer: Lexer = Lexer(SourceFile(File("testdata/lexer/correct.warp")))
                 lexer.tokeniseSourceCode()
                 lexer.printTokens().forEachIndexed { index, item -> item.shouldEqual(correctTokens[index]) }
             }

@@ -24,6 +24,7 @@
 package com.thomas.needham.ftl.frontend
 
 import io.kotlintest.specs.FeatureSpec
+import java.io.File
 
 class TokenRegistryTests : FeatureSpec(){
     val tokens : List<Token> = mutableListOf(
@@ -33,7 +34,7 @@ class TokenRegistryTests : FeatureSpec(){
     init{
         feature("The Token Registry"){
             scenario("Should contain these tokens"){
-                val lexer : Lexer = Lexer("func")
+                val lexer : Lexer = Lexer(SourceFile(File("testdata/tokenregistry/correcttokens.warp")))
                 lexer.tokeniseSourceCode()
                 lexer.tokenRegistry.registeredTokens.forEachIndexed { i, token ->
                     (token.value == tokens[i].value).and((token.type == tokens[i].type)).shouldBe(true)
@@ -42,8 +43,9 @@ class TokenRegistryTests : FeatureSpec(){
             scenario("Should Register a Token"){
                 val registry : TokenRegistry = TokenRegistry()
                 val tok : Token = Token("func", EnumTokenTypes.Types.KEYWORD_TOKEN)
+                registry.registerToken(tok.value)
                 (registry.registeredTokens.firstOrNull()?.value == tok.value)
-                        .and(registry.registeredTokens.firstOrNull()?.type == tok.type)
+                        .and(registry.registeredTokens.firstOrNull()?.type == tok.type).shouldBe(true)
             }
         }
     }
