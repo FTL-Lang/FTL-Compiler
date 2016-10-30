@@ -41,6 +41,7 @@ object Utils {
     @JvmStatic fun array2dOfBoolean(sizeOuter: Int, sizeInner: Int) : Array<BooleanArray> = Array(sizeOuter) { BooleanArray(sizeInner) }
 
     typealias StackFrame = Tuple3<Int, StringBuilder, Array<Char>>
+    typealias EvaluateStringParams = Tuple3<Int, StringBuilder, Array<Char>>
 
     /**
      * Returns a binary files contents
