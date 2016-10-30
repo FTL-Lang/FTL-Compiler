@@ -1,4 +1,0 @@
-func main -> () -> int {
-    println("Hello World \"Escape Test!\" 'After Escapeed Quotes'") // This is a comment
-    return 0
- }
