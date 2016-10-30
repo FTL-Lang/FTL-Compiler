@@ -28,9 +28,9 @@ package com.thomas.needham.ftl
 
 import com.thomas.needham.ftl.Utils.ReadAllText
 import com.thomas.needham.ftl.frontend.Lexer
+import com.thomas.needham.ftl.frontend.SourceFile
 import java.io.File
 
-data class Arguments(val inputFile: String, val outputFile: String)
 
 fun main(args: Array<String>) : Unit {
     println("FTL Language Compiler Helping You Code Faster Than Light!")
@@ -38,8 +38,8 @@ fun main(args: Array<String>) : Unit {
         for (i : Int in 0..args.size - 1) {
             println("args[${i}] = ${args[i]}")
         }
-        val arguments : Arguments = Arguments(args.first(), args.last())
-        val lexer : Lexer = Lexer(ReadAllText(File(arguments.inputFile)))
+        val arguments : CommandLineArguments = CommandLineArguments(args.first(), args.last())
+        val lexer : Lexer = Lexer(SourceFile(File(arguments.inputFile)))
         if(!lexer.tokeniseSourceCode()){
             System.err.println("Error Lexing File: ${arguments.inputFile}")
             return
