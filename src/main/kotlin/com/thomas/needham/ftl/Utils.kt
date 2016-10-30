@@ -40,8 +40,17 @@ object Utils {
     @JvmStatic fun array2dOfDouble(sizeOuter: Int, sizeInner: Int) : Array<DoubleArray> = Array(sizeOuter) { DoubleArray(sizeInner) }
     @JvmStatic fun array2dOfBoolean(sizeOuter: Int, sizeInner: Int) : Array<BooleanArray> = Array(sizeOuter) { BooleanArray(sizeInner) }
 
-    typealias StackFrame = Tuple3<Int, StringBuilder, Array<Char>>
     typealias EvaluateStringParams = Tuple3<Int, StringBuilder, Array<Char>>
+
+    val CONSOLE_COLOUR_RESET = "\u001B[0m"
+    val CONSOLE_COLOUR_BLACK = "\u001B[30m"
+    val CONSOLE_COLOUR_RED = "\u001B[31m"
+    val CONSOLE_COLOUR_GREEN = "\u001B[32m"
+    val CONSOLE_COLOUR_YELLOW = "\u001B[33m"
+    val CONSOLE_COLOUR_BLUE = "\u001B[34m"
+    val CONSOLE_COLOUR_PURPLE = "\u001B[35m"
+    val CONSOLE_COLOUR_CYAN = "\u001B[36m"
+    val CONSOLE_COLOUR_WHITE = "\u001B[37m"
 
     /**
      * Returns a binary files contents
