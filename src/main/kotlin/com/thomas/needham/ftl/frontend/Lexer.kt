@@ -23,7 +23,7 @@
 */
 package com.thomas.needham.ftl.frontend
 
-import com.thomas.needham.ftl.Utils.StackFrame
+import com.thomas.needham.ftl.Utils.EvaluateStringParams
 
 /**
  * This class represents the lexer which splits up source code
@@ -36,7 +36,7 @@ class Lexer {
     /**
      * The inputted source code
      */
-    val sourceString: String
+    val sourceFile : SourceFile
     /**
      * Token registry to contain the lexed tokens
      */
@@ -44,20 +44,20 @@ class Lexer {
 
     /**
      * Primary constructor for The Lexer
-     * @param sourceString The Source code to be lexed
+     * @param sourceFile The Source file to be lexed
      */
-    constructor(sourceString: String) {
-        this.sourceString = sourceString
+    constructor(sourceFile: SourceFile) {
+        this.sourceFile = sourceFile
         this.tokenRegistry = TokenRegistry()
     }
 
     /**
      * Secondary constructor for the Lexer to be used when compiling multiple files
-     * @param sourceString the Source code currently being lexed
+     * @param sourceFile the Source file currently being lexed
      * @param tokenRegistry A token registry containing the currently lexed tokens
      */
-    constructor(sourceString: String, tokenRegistry: TokenRegistry) {
-        this.sourceString = sourceString
+    constructor(sourceFile: SourceFile, tokenRegistry: TokenRegistry) {
+        this.sourceFile = sourceFile
         this.tokenRegistry = tokenRegistry
     }
 
@@ -66,54 +66,57 @@ class Lexer {
      * @return Whether the source code was tokenized successfully
      */
     fun tokeniseSourceCode(): Boolean {
-        var sourceChars: Array<Char> = (sourceString + '\u0000').toCharArray().toTypedArray() // Append a NULL terminator '\0'
         var index: Int = 0
         var currentToken: StringBuilder = StringBuilder()
-        while (index < sourceChars.size) { // while there is source code to read
-            if (!isControlCharacter(sourceChars[index])) { // is the current char a control character
-                if (sourceChars[index] == '\r' || sourceChars[index] == '\t') // ignore tabs and new lines
+        while (index < sourceFile.text.size) { // while there is source code to read
+            if (!isControlCharacter(sourceFile.text[index])) { // is the current char a control character
+                if (sourceFile.text[index] == '\r' || sourceFile.text[index] == '\t') // ignore tabs and new lines
                 {
                     index++
                     continue
                 }
-                currentToken.append(sourceChars[index]) // append the current char to the current token
+                currentToken.append(sourceFile.text[index]) // append the current char to the current token
                 index++
-            } else if (currentToken.toString() == "//") { // Ignore Comments
-                while (sourceChars[index] != '\n') {
+            }
+            else if (currentToken.toString() == "//") { // Ignore Single Line Comments
+                while (sourceFile.text[index] != '\n') {
                     currentToken = StringBuilder()
                     index++
                 }
-            } else {
-                val stackFrame = evaluateString(index, currentToken, sourceChars) // Check for unterminated string literals
-                if (stackFrame == null) { // String Was Properly Terminated
-                    System.err.println("Unterminated String Literal: ${currentToken.toString()}")
+            }
+            else if (currentToken.toString() == "/*") { // Ignore Multiline Comments
+                val start : Int = index
+                while ((index < sourceFile.length.toInt() - 1) &&
+                        !(sourceFile.text[index] == '*' && sourceFile.text[index + 1] == '/')){
+                    currentToken = StringBuilder()
+                    index++
+                }
+                if((index == sourceFile.length.toInt() - 1)){
+                    System.err.println("\n Unterminated Multiline Comment: ${currentToken.toString()}")
                     return false
                 }
-                index = stackFrame.valueX!!
+                index += 2 // Skip the */
+            }
+            else {
+                val stackFrame = evaluateString(index, currentToken, sourceFile.text) // Check for unterminated string literals
+                if (stackFrame == null) { // String Was Properly Terminated
+                    System.err.println("\n Unterminated String Literal: ${currentToken.toString()}")
+                    return false
+                }
+                index = stackFrame.valueX!! // XXX: Hack to emulate pass by reference
                 currentToken = stackFrame.valueY!!
-                sourceChars = stackFrame.valueZ!! // XXX: Hack to emulate pass by reference
 
                 if (!currentToken.toString().isNullOrEmpty() && !currentToken.toString().isNullOrBlank()) {
                     // If the current token is not null or empty add it to the registry
                     registerTokenToRegistry(currentToken.toString())
                 }
-                registerTokenToRegistry(sourceChars[index].toString()) // add the whitespace to the registry
+                registerTokenToRegistry(sourceFile.text[index].toString()) // add the whitespace to the registry
                 currentToken = StringBuilder() // clear the current token
                 index++
             }
         }
         return true
     }
-
-    /**
-     * Function to add tokens to the token registry
-     * @param token the token to add to the registry
-     */
-    private fun registerTokenToRegistry(token: String): Unit {
-        if (!token.isNullOrEmpty() && !token.isNullOrBlank())
-            tokenRegistry.registerToken(token)
-    }
-
     /**
      * Function to evaluate string literals i.e literals containing spaces and escaped characters
      * @param index index of the char currently being read
@@ -121,9 +124,9 @@ class Lexer {
      * @param sourceChars the source code currently being lexed
      * @return A StackFrame containing the index and token value after string termination,
      * or null if the string could not be terminated
-     * @see StackFrame
+     * @see EvaluateStringParams
      */
-    private fun evaluateString(index: Int, currentToken: StringBuilder, sourceChars: Array<Char>): StackFrame? {
+    private fun evaluateString(index: Int, currentToken: StringBuilder, sourceChars: Array<Char>): EvaluateStringParams? {
         var pIndex: Int = index // Make a copy of the passed values
         val pCurrentToken: StringBuilder = currentToken
         val pSourceChars: Array<Char> = sourceChars
@@ -176,9 +179,19 @@ class Lexer {
                 pIndex++
             }
         }
-        return StackFrame(pIndex, pCurrentToken, pSourceChars)
+        return EvaluateStringParams(pIndex, pCurrentToken, pSourceChars)
     }
 
+    /**
+     * Function to add tokens to the token registry
+     * @param token the token to add to the registry
+     */
+    private fun registerTokenToRegistry(token: String): Unit {
+        if (!token.isNullOrEmpty() && !token.isNullOrBlank())
+            tokenRegistry.registerToken(token)
+    }
+
+    
     /**
      * Returns Whether a character is a control character
      * @param ch the char to test
@@ -189,7 +202,9 @@ class Lexer {
                 ch != '\t' && ch != '(' &&
                 ch != ')' && ch != '[' &&
                 ch != ']' && ch != '{' &&
-                ch != '}' && ch != '\u0000')
+                ch != '}' && ch != '\u0000' &&
+                ch != ',' && ch != ':' &&
+                ch != ';' && ch != '.')
     }
 
     /**
@@ -203,5 +218,13 @@ class Lexer {
             println(token.toString())
         }
         return list
+    }
+
+    private fun getLineFromOffset(offset: Int) : Int {
+        return sourceFile.text.copyOfRange(0, offset).count { x -> x == '\n' } + 1
+    }
+
+    private fun getColumnFromOffset(offset: Int) : Int {
+        return sourceFile.text.toString().indexOf('\n', offset)
     }
 }
