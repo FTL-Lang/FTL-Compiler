@@ -25,21 +25,21 @@ package com.thomas.needham.ftl
 
 import com.thomas.needham.ftl.Utils.CONSOLE_COLOUR_RED
 import com.thomas.needham.ftl.Utils.CONSOLE_COLOUR_RESET
-import com.thomas.needham.ftl.frontend.EnumCompilerWarnings
-import com.thomas.needham.ftl.frontend.Span
 import com.thomas.needham.ftl.Utils.CONSOLE_COLOUR_YELLOW
 import com.thomas.needham.ftl.frontend.EnumCompilerErrors
+import com.thomas.needham.ftl.frontend.EnumCompilerWarnings
+import com.thomas.needham.ftl.frontend.Span
 
 object Logger {
-    @JvmStatic fun printMessage(string: String) : Unit{
-        println(string)
-    }
+	@JvmStatic fun printMessage(string: String): Unit {
+		println(string)
+	}
 
-    @JvmStatic fun printWarning(warningType: EnumCompilerWarnings.Warnings, span: Span) : Unit{
-        println(CONSOLE_COLOUR_YELLOW + span.toString() + " " + warningType.message + CONSOLE_COLOUR_RESET)
-    }
+	@JvmStatic fun printWarning(warningType: EnumCompilerWarnings.Warnings, span: Span): Unit {
+		println(CONSOLE_COLOUR_YELLOW + span.toString() + " " + warningType.message + CONSOLE_COLOUR_RESET)
+	}
 
-    @JvmStatic fun printError(errorType: EnumCompilerErrors.Errors, span: Span) : Unit{
-        println(CONSOLE_COLOUR_RED + span.toString() + " " + errorType.message + CONSOLE_COLOUR_RESET)
-    }
+	@JvmStatic fun printError(errorType: EnumCompilerErrors.Errors, span: Span): Unit {
+		println(CONSOLE_COLOUR_RED + span.toString() + " " + errorType.message + CONSOLE_COLOUR_RESET)
+	}
 }

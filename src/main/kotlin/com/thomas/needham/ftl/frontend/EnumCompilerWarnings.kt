@@ -24,7 +24,7 @@
 package com.thomas.needham.ftl.frontend
 
 class EnumCompilerWarnings {
-    enum class Warnings(val message: String) {
-        TEST("TEST")
-    }
+	enum class Warnings(val message: String) {
+		TEST("TEST")
+	}
 }

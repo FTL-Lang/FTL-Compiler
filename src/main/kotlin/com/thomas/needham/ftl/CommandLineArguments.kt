@@ -23,12 +23,12 @@
 */
 package com.thomas.needham.ftl
 
-class CommandLineArguments{
-    val inputFile: String
-    val outputFile: String
+class CommandLineArguments {
+	val inputFile: String
+	val outputFile: String
 
-    constructor(inputFile: String, outputFile: String){
-        this.inputFile = inputFile
-        this.outputFile = outputFile
-    }
+	constructor(inputFile: String, outputFile: String) {
+		this.inputFile = inputFile
+		this.outputFile = outputFile
+	}
 }

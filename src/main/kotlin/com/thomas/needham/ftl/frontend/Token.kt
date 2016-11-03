@@ -28,15 +28,15 @@ package com.thomas.needham.ftl.frontend
  * Class to represent a single Token outputted by the Lexer
  */
 class Token {
-    val value : String
-    val type : EnumTokenTypes.Types
+	val value: String
+	val type: EnumTokenTypes.Types
 
-    constructor(value: String, type: EnumTokenTypes.Types){
-        this.value = value
-        this.type = type
-    }
+	constructor(value: String, type: EnumTokenTypes.Types) {
+		this.value = value
+		this.type = type
+	}
 
-    override fun toString(): String {
-        return value + " : " + type.name
-    }
+	override fun toString(): String {
+		return value + " : " + type.name
+	}
 }

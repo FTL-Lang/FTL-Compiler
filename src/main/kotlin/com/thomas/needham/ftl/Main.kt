@@ -26,29 +26,27 @@
 
 package com.thomas.needham.ftl
 
-import com.thomas.needham.ftl.Utils.ReadAllText
 import com.thomas.needham.ftl.frontend.Lexer
 import com.thomas.needham.ftl.frontend.SourceFile
 import java.io.File
 
 
-fun main(args: Array<String>) : Unit {
-    Logger.printMessage("FTL Language Compiler Helping You Code Faster Than Light!")
-    if(args.size >= 2) { // TODO Parse Arguments
-        for (i : Int in 0..args.size - 1) {
-            Logger.printMessage("args[${i}] = ${args[i]}")
-        }
-        val arguments : CommandLineArguments = CommandLineArguments(args.first(), args.last())
-        val lexer : Lexer = Lexer(SourceFile(File(arguments.inputFile)))
-        if(!lexer.tokeniseSourceCode()){
-            System.err.println("Error Lexing File: ${arguments.inputFile}")
-            return
-        }
-        lexer.printTokens()
-        Logger.printMessage("File Lexed Successfully ${arguments.inputFile}")
-    }
-    else{
-        Logger.printMessage("Invalid Arguments")
-        return
-    }
+fun main(args: Array<String>): Unit {
+	Logger.printMessage("FTL Language Compiler Helping You Code Faster Than Light!")
+	if (args.size >= 2) { // TODO Parse Arguments
+		for (i: Int in 0..args.size - 1) {
+			Logger.printMessage("args[${i}] = ${args[i]}")
+		}
+		val arguments: CommandLineArguments = CommandLineArguments(args.first(), args.last())
+		val lexer: Lexer = Lexer(SourceFile(File(arguments.inputFile)))
+		if (!lexer.tokeniseSourceCode()) {
+			System.err.println("Error Lexing File: ${arguments.inputFile}")
+			return
+		}
+		lexer.printTokens()
+		Logger.printMessage("File Lexed Successfully ${arguments.inputFile}")
+	} else {
+		Logger.printMessage("Invalid Arguments")
+		return
+	}
 }

@@ -23,10 +23,10 @@
 */
 package com.thomas.needham.ftl.frontend
 
-class EnumCompilerErrors{
-    enum class Errors(val message: String) {
-        INTERNAL_ERROR("FTL 0001: An internal error occurred in the compiler"),
-        UNTERMINATED_STRING("FTL 0002: Unterminated String Literal"),
-        UNTERMINATED_MULTILINE_COMMENT("FTL 0003 Unterminated Multiline comment")
-    }
+class EnumCompilerErrors {
+	enum class Errors(val message: String) {
+		INTERNAL_ERROR("FTL 0001: An internal error occurred in the compiler"),
+		UNTERMINATED_STRING("FTL 0002: Unterminated String Literal"),
+		UNTERMINATED_MULTILINE_COMMENT("FTL 0003 Unterminated Multiline comment")
+	}
 }

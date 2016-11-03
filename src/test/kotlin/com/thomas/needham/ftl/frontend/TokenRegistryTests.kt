@@ -26,27 +26,28 @@ package com.thomas.needham.ftl.frontend
 import io.kotlintest.specs.FeatureSpec
 import java.io.File
 
-class TokenRegistryTests : FeatureSpec(){
-    val tokens : List<Token> = mutableListOf(
-            Token("func", EnumTokenTypes.Types.KEYWORD_TOKEN),
-            Token("\u0000", EnumTokenTypes.Types.END_OF_FILE_TOKEN)
-    )
-    init{
-        feature("The Token Registry"){
-            scenario("Should contain these tokens"){
-                val lexer : Lexer = Lexer(SourceFile(File("testdata/tokenregistry/correcttokens.warp")))
-                lexer.tokeniseSourceCode()
-                lexer.tokenRegistry.registeredTokens.forEachIndexed { i, token ->
-                    (token.value == tokens[i].value).and((token.type == tokens[i].type)).shouldBe(true)
-                }
-            }
-            scenario("Should Register a Token"){
-                val registry : TokenRegistry = TokenRegistry()
-                val tok : Token = Token("func", EnumTokenTypes.Types.KEYWORD_TOKEN)
-                registry.registerToken(tok.value)
-                (registry.registeredTokens.firstOrNull()?.value == tok.value)
-                        .and(registry.registeredTokens.firstOrNull()?.type == tok.type).shouldBe(true)
-            }
-        }
-    }
+class TokenRegistryTests : FeatureSpec() {
+	val tokens: List<Token> = mutableListOf(
+		Token("func", EnumTokenTypes.Types.KEYWORD_TOKEN),
+		Token("\u0000", EnumTokenTypes.Types.END_OF_FILE_TOKEN)
+	)
+
+	init {
+		feature("The Token Registry") {
+			scenario("Should contain these tokens") {
+				val lexer: Lexer = Lexer(SourceFile(File("testdata/tokenregistry/correcttokens.warp")))
+				lexer.tokeniseSourceCode()
+				lexer.tokenRegistry.registeredTokens.forEachIndexed { i, token ->
+					(token.value == tokens[i].value).and((token.type == tokens[i].type)).shouldBe(true)
+				}
+			}
+			scenario("Should Register a Token") {
+				val registry: TokenRegistry = TokenRegistry()
+				val tok: Token = Token("func", EnumTokenTypes.Types.KEYWORD_TOKEN)
+				registry.registerToken(tok.value)
+				(registry.registeredTokens.firstOrNull()?.value == tok.value)
+					.and(registry.registeredTokens.firstOrNull()?.type == tok.type).shouldBe(true)
+			}
+		}
+	}
 }

@@ -27,33 +27,33 @@ package com.thomas.needham.ftl.frontend
  * Class to represent a location within a source file
  * @author Thomas Needham
  */
-class Span{
-    /**
-     *
-     */
-    val file : SourceFile
-    val beginLine : Int
-    val beginColumn : Int
-    val endLine : Int
-    val endColumn : Int
+class Span {
+	/**
+	 *
+	 */
+	val file: SourceFile
+	val beginLine: Int
+	val beginColumn: Int
+	val endLine: Int
+	val endColumn: Int
 
-    constructor(sourceFile: SourceFile, beginLine: Int, beginColumn: Int, endLine: Int = -1, endColumn: Int = -1) {
-        this.file = sourceFile
-        this.beginLine = beginLine
-        this.beginColumn = beginColumn
-        this.endLine = endLine
-        this.endColumn = endColumn
-    }
+	constructor(sourceFile: SourceFile, beginLine: Int, beginColumn: Int, endLine: Int = -1, endColumn: Int = -1) {
+		this.file = sourceFile
+		this.beginLine = beginLine
+		this.beginColumn = beginColumn
+		this.endLine = endLine
+		this.endColumn = endColumn
+	}
 
-    fun getBeginPosition() : String {
-        return "Line: ${beginLine}, Column: ${beginColumn}"
-    }
+	fun getBeginPosition(): String {
+		return "Line: ${beginLine}, Column: ${beginColumn}"
+	}
 
-    fun getEndPosition() : String {
-        return "Line: ${endLine}, Column: ${endColumn}"
-    }
+	fun getEndPosition(): String {
+		return "Line: ${endLine}, Column: ${endColumn}"
+	}
 
-    override fun toString(): String {
-        return "${file.file.name}: ${getBeginPosition()} To ${getEndPosition()}"
-    }
+	override fun toString(): String {
+		return "${file.file.name}: ${getBeginPosition()} To ${getEndPosition()}"
+	}
 }

@@ -27,47 +27,47 @@ import io.kotlintest.specs.FeatureSpec
 import java.io.File
 
 class LexerTests : FeatureSpec() {
-    val correctSourceCode: String = "func main -> () -> int {" +
-            "\n println(\"Hello World \\\"Escape Test!\\\" 'After Escaped Quotes'\") // This is a comment\n" +
-            "return 0\n }"
-    val unterminatedString: String = "func main -> () -> int {" +
-            "\n println(\"Hello World \\\"Escape Test!\\\" 'After Escaped Quotes') // This is a comment\n" +
-            "return 0\n }"
-    val correctTokens: List<String> = arrayOf<String>(
-            "func : KEYWORD_TOKEN",
-            "main : IDENTIFIER_TOKEN",
-            "-> : ARROW_TOKEN",
-            "( : LEFT_PAREN_TOKEN",
-            ") : RIGHT_PAREN_TOKEN",
-            "-> : ARROW_TOKEN",
-            "int : TYPE_TOKEN",
-            "{ : LEFT_BRACE_TOKEN",
-            "println : IDENTIFIER_TOKEN",
-            "( : LEFT_PAREN_TOKEN",
-            "\"Hello World \"Escape Test!\" 'After Escaped Quotes'\" : STRING_LITERAL",
-            "return : KEYWORD_TOKEN",
-            "0 : INTEGER_LITERAL",
-            "} : RIGHT_BRACE_TOKEN",
-            "\u0000 : END_OF_FILE_TOKEN"
-    ).toList()
+	val correctSourceCode: String = "func main -> () -> int {" +
+		"\n println(\"Hello World \\\"Escape Test!\\\" 'After Escaped Quotes'\") // This is a comment\n" +
+		"return 0\n }"
+	val unterminatedString: String = "func main -> () -> int {" +
+		"\n println(\"Hello World \\\"Escape Test!\\\" 'After Escaped Quotes') // This is a comment\n" +
+		"return 0\n }"
+	val correctTokens: List<String> = arrayOf<String>(
+		"func : KEYWORD_TOKEN",
+		"main : IDENTIFIER_TOKEN",
+		"-> : ARROW_TOKEN",
+		"( : LEFT_PAREN_TOKEN",
+		") : RIGHT_PAREN_TOKEN",
+		"-> : ARROW_TOKEN",
+		"int : TYPE_TOKEN",
+		"{ : LEFT_BRACE_TOKEN",
+		"println : IDENTIFIER_TOKEN",
+		"( : LEFT_PAREN_TOKEN",
+		"\"Hello World \"Escape Test!\" 'After Escaped Quotes'\" : STRING_LITERAL",
+		"return : KEYWORD_TOKEN",
+		"0 : INTEGER_LITERAL",
+		"} : RIGHT_BRACE_TOKEN",
+		"\u0000 : END_OF_FILE_TOKEN"
+	).toList()
 
-    init {
-        feature("The Source Tokenizer") {
-            scenario("Should Successfully Tokenize This Code ${correctSourceCode}") {
-                val lexer: Lexer = Lexer(SourceFile(File("testdata/lexer/correct.warp")))
-                lexer.tokeniseSourceCode().shouldBe(true)
-            }
+	init {
+		feature("The Source Tokenizer") {
+			scenario("Should Successfully Tokenize This Code ${correctSourceCode}") {
+				val lexer: Lexer = Lexer(SourceFile(File("testdata/lexer/correct.warp")))
+				lexer.tokeniseSourceCode().shouldBe(true)
+			}
 
-            scenario("Should Error On Unterminated String") {
-                val lexer: Lexer = Lexer(SourceFile(File("testdata/lexer/unterminated.warp")))
-                lexer.tokeniseSourceCode().shouldBe(false)
-            }
+			scenario("Should Error On Unterminated String") {
+				val lexer: Lexer = Lexer(SourceFile(File("testdata/lexer/unterminated.warp")))
+				lexer.tokeniseSourceCode().shouldBe(false)
+			}
 
-            scenario("Should Print The Following Tokens ${correctTokens.forEach { println(it) }}") {
-                val lexer: Lexer = Lexer(SourceFile(File("testdata/lexer/correct.warp")))
-                lexer.tokeniseSourceCode()
-                lexer.printTokens().forEachIndexed { index, item -> item.shouldEqual(correctTokens[index]) }
-            }
-        }
-    }
+			scenario("Should Print The Following Tokens ${correctTokens.forEach { println(it) }}") {
+				val lexer: Lexer = Lexer(SourceFile(File("testdata/lexer/correct.warp")))
+				lexer.tokeniseSourceCode()
+				lexer.printTokens().forEachIndexed { index, item -> item.shouldEqual(correctTokens[index]) }
+			}
+		}
+	}
 }

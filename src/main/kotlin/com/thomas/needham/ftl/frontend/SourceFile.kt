@@ -29,22 +29,21 @@ import java.io.File
  * Created by thoma on 30/10/2016.
  */
 class SourceFile {
-    val file : File
-    val text : Array<Char>
-    val path : String
-    val length : Long
-    val lineCount : Long
+	val file: File
+	val text: Array<Char>
+	val path: String
+	val length: Long
+	val lineCount: Long
 
-    constructor(file: File) {
-        this.file = file
-        if(file.isFile && file.exists() && file.canRead()){
-            this.text = (file.readText() + "\u0000").toCharArray().toTypedArray()
-            this.path = file.absolutePath
-            this.length = file.length()
-            this.lineCount = this.text.count { x -> x == '\n' }.toLong()
-        }
-        else{
-            throw IllegalArgumentException("Invalid Source File")
-        }
-    }
+	constructor(file: File) {
+		this.file = file
+		if (file.isFile && file.exists() && file.canRead()) {
+			this.text = (file.readText() + "\u0000").toCharArray().toTypedArray()
+			this.path = file.absolutePath
+			this.length = file.length()
+			this.lineCount = this.text.count { x -> x == '\n' }.toLong()
+		} else {
+			throw IllegalArgumentException("Invalid Source File")
+		}
+	}
 }

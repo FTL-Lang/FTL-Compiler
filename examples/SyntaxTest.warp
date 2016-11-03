@@ -48,4 +48,10 @@ class SyntaxTest -> {
    func other -> (param -> int, other -> int) -> void {
         println(param + other)
    }
- }
+
+
+}
+
+interface A -> {
+
+}
