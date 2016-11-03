@@ -24,20 +24,44 @@ SOFTWARE.
 package com.thomas.needham.ftl.utils
 
 /**
- * Created by thoma on 29/06/2016.
+ * This class represents a tuple with three items
+ * @param X The type of the first item
+ * @param Y The type of the second item
+ * @param Z The type of the third item
  */
 open class Tuple3<X, Y, Z> {
+	/**
+	 * The First Item
+	 */
 	var valueX: X? = null
+	/**
+	 * The Second Item
+	 */
 	var valueY: Y? = null
+	/**
+	 * The Third Item
+	 */
 	var valueZ: Z? = null
 
+	/**
+	 * Constructor for Tuple3
+	 * @param x The first item
+	 * @param y the second item
+	 * @param z the third item
+	 */
 	constructor(x: X?, y: Y?, z: Z?) {
 		this.valueX = x
 		this.valueY = y
 		this.valueZ = z
 	}
 
+	/**
+	 * Companion object for storing static data
+	 */
 	companion object Blank {
+		/**
+		 * A blank Tuple3
+		 */
 		@JvmStatic val BLANK = Tuple3<Any?, Any?, Any?>(null, null, null)
 	}
 }

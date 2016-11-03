@@ -24,18 +24,38 @@ SOFTWARE.
 package com.thomas.needham.ftl.utils
 
 /**
- * Created by thoma on 29/06/2016.
+ * This class represents a Tuple with two items
+ * @param X The Type of the first item
+ * @param Y The Type of the second item
  */
 open class Tuple2<X, Y> {
+	/**
+	 * The First Item
+	 */
 	var valueX: X? = null
+
+	/**
+	 * The Second Item
+	 */
 	var valueY: Y? = null
 
+	/**
+	 * Constructor for Tuple2
+	 * @param x the first item
+	 * @param y the second item
+	 */
 	constructor(x: X?, y: Y?) {
 		this.valueX = x
 		this.valueY = y
 	}
 
+	/**
+	 * Conpanion object to hold static data
+	 */
 	companion object Blank {
+		/**
+		 * A Blank Tuple2
+		 */
 		@JvmStatic val BLANK = Tuple2<Any?, Any?>(null, null)
 	}
 }

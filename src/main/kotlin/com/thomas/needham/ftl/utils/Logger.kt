@@ -30,15 +30,36 @@ import com.thomas.needham.ftl.errors.EnumCompilerErrors
 import com.thomas.needham.ftl.errors.EnumCompilerWarnings
 import com.thomas.needham.ftl.frontend.lexer.Span
 
+/**
+ * Static functions that allow logging messages to the console in multiple colours
+ */
 object Logger {
-	@JvmStatic fun printMessage(string: String): Unit {
-		println(string)
+	/**
+	 * Prints a message to the console in white
+	 * @param message the message to print
+	 */
+	@JvmStatic fun printMessage(message: String): Unit {
+		println(message)
 	}
 
+	/**
+	 * Prints a warning message to the console in yellow
+	 * @param warningType the type of warning message
+	 * @param span the location in the file where the warning occurred
+	 * @see EnumCompilerWarnings
+	 * @see Span
+	 */
 	@JvmStatic fun printWarning(warningType: EnumCompilerWarnings.Warnings, span: Span): Unit {
 		println(CONSOLE_COLOUR_YELLOW + span.toString() + " " + warningType.message + CONSOLE_COLOUR_RESET)
 	}
 
+	/**
+	 * Prints a warning message to the console in red
+	 * @param errorType the type of error message
+	 * @param span the location in the file where the error occurred
+	 * @see EnumCompilerErrors
+	 * @see Span
+	 */
 	@JvmStatic fun printError(errorType: EnumCompilerErrors.Errors, span: Span): Unit {
 		println(CONSOLE_COLOUR_RED + span.toString() + " " + errorType.message + CONSOLE_COLOUR_RESET)
 	}

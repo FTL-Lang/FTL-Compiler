@@ -26,15 +26,40 @@ package com.thomas.needham.ftl.utils
 import java.io.File
 
 /**
- * Created by thoma on 30/10/2016.
+ * This class represents a source code file
+ * @author Thomas Needham
  */
 class SourceFile {
+	/**
+	 * Handle to the file
+	 */
 	val file: File
+
+	/**
+	 * The text contained in the file
+	 */
 	val text: Array<Char>
+
+	/**
+	 * The path to the file
+	 */
 	val path: String
+
+	/**
+	 * the size of the file
+	 */
 	val length: Long
+
+	/**
+	 * The number of lines in the file
+	 */
+
 	val lineCount: Long
 
+	/**
+	 * Constructor for SourceFile
+	 * @param file A handle to a file
+	 */
 	constructor(file: File) {
 		this.file = file
 		if (file.isFile && file.exists() && file.canRead()) {

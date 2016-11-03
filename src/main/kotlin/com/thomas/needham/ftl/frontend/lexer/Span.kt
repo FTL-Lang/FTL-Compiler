@@ -31,14 +31,41 @@ import com.thomas.needham.ftl.utils.SourceFile
  */
 class Span {
 	/**
-	 *
+	 * The SourceFile that this span is contained in
+	 * @see SourceFile
 	 */
 	val file: SourceFile
+
+	/**
+	 * The Line that this span starts on
+	 */
 	val beginLine: Int
+
+	/**
+	 * The Column that this span starts on
+	 */
 	val beginColumn: Int
+
+	/**
+	 * The Line that this span ends on
+	 */
 	val endLine: Int
+
+	/**
+	 * The Column that this span ends on
+	 */
+
 	val endColumn: Int
 
+	/**
+	 * Constructor for Span
+	 * @param sourceFile The SourceFile that this span is contained in
+	 * @param beginLine The Line that this span starts on
+	 * @param beginColumn The Column that this span starts on
+	 * @param endLine The Line that this span ends on Leave blank if unknown
+	 * @param endColumn The Column that this span ends on Leave blank if unknown
+	 * @see SourceFile
+	 */
 	constructor(sourceFile: SourceFile, beginLine: Int, beginColumn: Int, endLine: Int = -1, endColumn: Int = -1) {
 		this.file = sourceFile
 		this.beginLine = beginLine
@@ -47,14 +74,25 @@ class Span {
 		this.endColumn = endColumn
 	}
 
+	/**
+	 * Function to get the beginning location of this span
+	 * @return A string which represents the beginning of this span
+	 */
 	fun getBeginPosition(): String {
 		return "Line: ${beginLine}, Column: ${beginColumn}"
 	}
-
+	/**
+	 * Function to get the ending location of this span
+	 * @return A string which represents the end of this span
+	 */
 	fun getEndPosition(): String {
 		return "Line: ${endLine}, Column: ${endColumn}"
 	}
 
+	/**
+	 * Function to get a string which represents this span
+	 * @return A string that represents this span
+	 */
 	override fun toString(): String {
 		return "${file.file.name}: ${getBeginPosition()} To ${getEndPosition()}"
 	}

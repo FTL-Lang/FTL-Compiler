@@ -32,7 +32,10 @@ import com.thomas.needham.ftl.utils.Logger
 import com.thomas.needham.ftl.utils.SourceFile
 import java.io.File
 
-
+/**
+ * The main entry point for the compiler
+ * @param args passed command line arguments
+ */
 fun main(args: Array<String>): Unit {
 	Logger.printMessage("FTL Language Compiler Helping You Code Faster Than Light!")
 	if (args.size >= 2) { // TODO Parse Arguments

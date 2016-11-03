@@ -23,10 +23,25 @@
 */
 package com.thomas.needham.ftl.utils
 
+/**
+ * This class represents the command line arguments that are passed to the compiler
+ */
 class CommandLineArguments {
+	/**
+	 * The Input File Path
+	 */
 	val inputFile: String
+
+	/**
+	 * The Output File Path
+	 */
 	val outputFile: String
 
+	/**
+	 * Constructor for CommandLineArguments
+	 * @param inputFile the input file path
+	 * @param outputFile the output file path
+	 */
 	constructor(inputFile: String, outputFile: String) {
 		this.inputFile = inputFile
 		this.outputFile = outputFile

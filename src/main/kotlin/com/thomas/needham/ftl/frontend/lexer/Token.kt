@@ -30,14 +30,31 @@ import com.thomas.needham.ftl.frontend.lexer.EnumTokenTypes
  * Class to represent a single Token outputted by the Lexer
  */
 class Token {
+	/**
+	 * The String value of this Token
+	 */
 	val value: String
+	/**
+	 * The Type of this Token
+	 * @see EnumTokenTypes
+	 */
 	val type: EnumTokenTypes.Types
 
+	/**
+	 * Constructor for Token
+	 * @param value the string value of this token
+	 * @param type the type of this token
+	 * @see EnumTokenTypes
+	 */
 	constructor(value: String, type: EnumTokenTypes.Types) {
 		this.value = value
 		this.type = type
 	}
 
+	/**
+	 * Function to get a string that represents this token
+	 * @return A string which represents this token
+	 */
 	override fun toString(): String {
 		return value + " : " + type.name
 	}
