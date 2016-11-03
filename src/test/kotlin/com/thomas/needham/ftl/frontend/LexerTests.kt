@@ -23,6 +23,8 @@
 */
 package com.thomas.needham.ftl.frontend
 
+import com.thomas.needham.ftl.frontend.lexer.Lexer
+import com.thomas.needham.ftl.utils.SourceFile
 import io.kotlintest.specs.FeatureSpec
 import java.io.File
 

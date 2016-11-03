@@ -21,12 +21,25 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.
 */
-package com.thomas.needham.ftl.frontend
+package com.thomas.needham.ftl.utils
 
-class EnumCompilerErrors {
-	enum class Errors(val message: String) {
-		INTERNAL_ERROR("FTL 0001: An internal error occurred in the compiler"),
-		UNTERMINATED_STRING("FTL 0002: Unterminated String Literal"),
-		UNTERMINATED_MULTILINE_COMMENT("FTL 0003 Unterminated Multiline comment")
+import com.thomas.needham.ftl.utils.GlobalFunctions.CONSOLE_COLOUR_RED
+import com.thomas.needham.ftl.utils.GlobalFunctions.CONSOLE_COLOUR_RESET
+import com.thomas.needham.ftl.utils.GlobalFunctions.CONSOLE_COLOUR_YELLOW
+import com.thomas.needham.ftl.errors.EnumCompilerErrors
+import com.thomas.needham.ftl.errors.EnumCompilerWarnings
+import com.thomas.needham.ftl.frontend.lexer.Span
+
+object Logger {
+	@JvmStatic fun printMessage(string: String): Unit {
+		println(string)
+	}
+
+	@JvmStatic fun printWarning(warningType: EnumCompilerWarnings.Warnings, span: Span): Unit {
+		println(CONSOLE_COLOUR_YELLOW + span.toString() + " " + warningType.message + CONSOLE_COLOUR_RESET)
+	}
+
+	@JvmStatic fun printError(errorType: EnumCompilerErrors.Errors, span: Span): Unit {
+		println(CONSOLE_COLOUR_RED + span.toString() + " " + errorType.message + CONSOLE_COLOUR_RESET)
 	}
 }

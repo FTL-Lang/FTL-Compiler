@@ -21,10 +21,12 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.
 */
-package com.thomas.needham.ftl.frontend
+package com.thomas.needham.ftl.frontend.lexer
 
-import com.thomas.needham.ftl.Utils.TryParse
-import com.thomas.needham.ftl.Utils.TryDecode
+import com.thomas.needham.ftl.utils.GlobalFunctions.TryParse
+import com.thomas.needham.ftl.utils.GlobalFunctions.TryDecode
+import com.thomas.needham.ftl.frontend.lexer.EnumTokenTypes
+import com.thomas.needham.ftl.frontend.lexer.Token
 
 /**
  * Class to manage all of the tokens that are predefined within the compiler

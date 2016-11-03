@@ -1,7 +1,7 @@
 /*
     The MIT License (MIT)
 
-    FTL-Lang Copyright (c) 2016 thoma
+    FTL-Compiler Copyright (c) 2016 thoma
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
@@ -21,14 +21,41 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.
 */
-package com.thomas.needham.ftl
+package com.thomas.needham.ftl.frontend.lexer
 
-class CommandLineArguments {
-	val inputFile: String
-	val outputFile: String
+import com.thomas.needham.ftl.utils.SourceFile
 
-	constructor(inputFile: String, outputFile: String) {
-		this.inputFile = inputFile
-		this.outputFile = outputFile
+/**
+ * Class to represent a location within a source file
+ * @author Thomas Needham
+ */
+class Span {
+	/**
+	 *
+	 */
+	val file: SourceFile
+	val beginLine: Int
+	val beginColumn: Int
+	val endLine: Int
+	val endColumn: Int
+
+	constructor(sourceFile: SourceFile, beginLine: Int, beginColumn: Int, endLine: Int = -1, endColumn: Int = -1) {
+		this.file = sourceFile
+		this.beginLine = beginLine
+		this.beginColumn = beginColumn
+		this.endLine = endLine
+		this.endColumn = endColumn
+	}
+
+	fun getBeginPosition(): String {
+		return "Line: ${beginLine}, Column: ${beginColumn}"
+	}
+
+	fun getEndPosition(): String {
+		return "Line: ${endLine}, Column: ${endColumn}"
+	}
+
+	override fun toString(): String {
+		return "${file.file.name}: ${getBeginPosition()} To ${getEndPosition()}"
 	}
 }

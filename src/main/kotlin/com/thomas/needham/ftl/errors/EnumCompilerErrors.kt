@@ -1,7 +1,7 @@
 /*
     The MIT License (MIT)
 
-    FTL-Lang Copyright (c) 2016 thoma
+    FTL-Compiler Copyright (c) 2016 thoma
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
@@ -21,29 +21,12 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.
 */
-package com.thomas.needham.ftl.frontend
+package com.thomas.needham.ftl.errors
 
-import java.io.File
-
-/**
- * Created by thoma on 30/10/2016.
- */
-class SourceFile {
-	val file: File
-	val text: Array<Char>
-	val path: String
-	val length: Long
-	val lineCount: Long
-
-	constructor(file: File) {
-		this.file = file
-		if (file.isFile && file.exists() && file.canRead()) {
-			this.text = (file.readText() + "\u0000").toCharArray().toTypedArray()
-			this.path = file.absolutePath
-			this.length = file.length()
-			this.lineCount = this.text.count { x -> x == '\n' }.toLong()
-		} else {
-			throw IllegalArgumentException("Invalid Source File")
-		}
+class EnumCompilerErrors {
+	enum class Errors(val message: String) {
+		INTERNAL_ERROR("FTL 0001: An internal error occurred in the compiler"),
+		UNTERMINATED_STRING("FTL 0002: Unterminated String Literal"),
+		UNTERMINATED_MULTILINE_COMMENT("FTL 0003 Unterminated Multiline comment")
 	}
 }

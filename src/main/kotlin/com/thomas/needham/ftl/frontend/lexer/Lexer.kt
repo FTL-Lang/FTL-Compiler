@@ -21,10 +21,13 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.
 */
-package com.thomas.needham.ftl.frontend
+package com.thomas.needham.ftl.frontend.lexer
 
-import com.thomas.needham.ftl.Logger
-import com.thomas.needham.ftl.Utils.EvaluateStringParams
+import com.thomas.needham.ftl.utils.Logger
+import com.thomas.needham.ftl.utils.GlobalFunctions.EvaluateStringParams
+import com.thomas.needham.ftl.utils.SourceFile
+import com.thomas.needham.ftl.frontend.lexer.Token
+import com.thomas.needham.ftl.frontend.lexer.TokenRegistry
 
 /**
  * This class represents the lexer which splits up source code

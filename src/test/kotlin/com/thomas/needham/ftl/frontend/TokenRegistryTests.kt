@@ -23,6 +23,11 @@
 */
 package com.thomas.needham.ftl.frontend
 
+import com.thomas.needham.ftl.frontend.lexer.EnumTokenTypes
+import com.thomas.needham.ftl.frontend.lexer.Lexer
+import com.thomas.needham.ftl.frontend.lexer.Token
+import com.thomas.needham.ftl.frontend.lexer.TokenRegistry
+import com.thomas.needham.ftl.utils.SourceFile
 import io.kotlintest.specs.FeatureSpec
 import java.io.File
 

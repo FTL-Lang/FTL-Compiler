@@ -21,10 +21,37 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.
 */
-package com.thomas.needham.ftl.frontend
+package com.thomas.needham.ftl.frontend.lexer
 
-class EnumCompilerWarnings {
-	enum class Warnings(val message: String) {
-		TEST("TEST")
+
+/**
+ * Container class for the TokenTypes Enum
+ */
+class EnumTokenTypes {
+	/**
+	 * Enum containing a list of token types
+	 */
+	enum class Types(val value: Int) {
+		KEYWORD_TOKEN(1.shl(0)),
+		OPERATOR_TOKEN(1.shl(1)),
+		LEFT_BRACE_TOKEN(1.shl(2)),
+		RIGHT_BRACE_TOKEN(1.shl(3)),
+		LEFT_SQUARE_PAREN_TOKEN(1.shl(4)),
+		RIGHT_SQUARE_PAREN_TOKEN(1.shl(5)),
+		LEFT_PAREN_TOKEN(1.shl(6)),
+		RIGHT_PAREN_TOKEN(1.shl(7)),
+		WHITESPACE_TOKEN(1.shl(8)),
+		END_OF_FILE_TOKEN(1.shl(9)),
+		IDENTIFIER_TOKEN(1.shl(10)),
+		NUMERIC_LITERAL(1.shl(11)),
+		STRING_LITERAL(1.shl(12)),
+		COMMENT_TOKEN(1.shl(13)),
+		COMMA_TOKEN(1.shl(14)),
+		DOT_TOKEN(1.shl(15)),
+		TYPE_TOKEN(1.shl(16)),
+		COLON_TOKEN(1.shl(17)),
+		SEMICOLON_TOKEN(1.shl(18)),
+		ARROW_TOKEN(1.shl(19)),
+		UNKNOWN_TOKEN(1.shl(32))
 	}
 }

@@ -21,14 +21,15 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.
 */
-package com.thomas.needham.ftl
+package com.thomas.needham.ftl.utils
 
+import com.thomas.needham.ftl.utils.Tuple3
 import java.io.*
 
 /**
  * Static object containing useful utility functions which are accessible from the global scope
  */
-object Utils {
+object GlobalFunctions {
 
 	@JvmStatic inline fun <reified INNER> array2d(sizeOuter: Int, sizeInner: Int, noinline innerInit: (Int) -> INNER): Array<Array<INNER>> = Array(sizeOuter) { Array<INNER>(sizeInner, innerInit) }
 	@JvmStatic fun array2dOfInt(sizeOuter: Int, sizeInner: Int): Array<IntArray> = Array(sizeOuter) { IntArray(sizeInner) }

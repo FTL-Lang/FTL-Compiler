@@ -26,8 +26,10 @@
 
 package com.thomas.needham.ftl
 
-import com.thomas.needham.ftl.frontend.Lexer
-import com.thomas.needham.ftl.frontend.SourceFile
+import com.thomas.needham.ftl.frontend.lexer.Lexer
+import com.thomas.needham.ftl.utils.CommandLineArguments
+import com.thomas.needham.ftl.utils.Logger
+import com.thomas.needham.ftl.utils.SourceFile
 import java.io.File
 
 
