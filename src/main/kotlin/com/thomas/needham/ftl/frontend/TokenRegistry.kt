@@ -165,9 +165,9 @@ class TokenRegistry {
 			registeredTokens.add(temp) // just add it to the registry no need to resolve it's type
 		} else { // if the token is not already present
 			if (Double.TryParse(value)) // is it a valid numeric literal
-				temp = Token(value, EnumTokenTypes.Types.INTEGER_LITERAL)
+				temp = Token(value, EnumTokenTypes.Types.NUMERIC_LITERAL)
 			else if(Long.TryDecode(value)) // is it a valid non base 10 numeric literal
-				temp = Token(value, EnumTokenTypes.Types.INTEGER_LITERAL)
+				temp = Token(value, EnumTokenTypes.Types.NUMERIC_LITERAL)
 			else if (value.startsWith("\"") && value.endsWith("\"")) // is it a valid string literal
 				temp = Token(value, EnumTokenTypes.Types.STRING_LITERAL)
 			else if (!value.isNullOrEmpty() && !value.isNullOrBlank()) // is it a valid identifier

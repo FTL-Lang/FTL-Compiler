@@ -43,7 +43,7 @@ class EnumTokenTypes {
 		WHITESPACE_TOKEN(1.shl(8)),
 		END_OF_FILE_TOKEN(1.shl(9)),
 		IDENTIFIER_TOKEN(1.shl(10)),
-		INTEGER_LITERAL(1.shl(11)),
+		NUMERIC_LITERAL(1.shl(11)),
 		STRING_LITERAL(1.shl(12)),
 		COMMENT_TOKEN(1.shl(13)),
 		COMMA_TOKEN(1.shl(14)),

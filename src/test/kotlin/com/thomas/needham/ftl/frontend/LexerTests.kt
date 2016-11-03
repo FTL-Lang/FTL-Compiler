@@ -46,7 +46,7 @@ class LexerTests : FeatureSpec() {
 		"( : LEFT_PAREN_TOKEN",
 		"\"Hello World \"Escape Test!\" 'After Escaped Quotes'\" : STRING_LITERAL",
 		"return : KEYWORD_TOKEN",
-		"0 : INTEGER_LITERAL",
+		"0 : NUMERIC_LITERAL",
 		"} : RIGHT_BRACE_TOKEN",
 		"\u0000 : END_OF_FILE_TOKEN"
 	).toList()
