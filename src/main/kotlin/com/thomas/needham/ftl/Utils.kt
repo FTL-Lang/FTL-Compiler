@@ -110,4 +110,133 @@ object Utils {
 			return false
 		}
 	}
+
+	/**
+	 * Extension method for Float that safely tries to parse a float
+	 * @param value the value to parse
+	 * @return true if the parse succeeded false if the parse failed
+	 */
+	fun Float.Companion.TryParse(value: String): Boolean { // Companion is required to make TryParse Static
+		try {
+			value.toFloat()
+			return true
+		} catch (nfe: NumberFormatException) {
+			return false
+		}
+	}
+
+	/**
+	 * Extension method for Int that safely tries to parse a int
+	 * @param value the value to parse
+	 * @return true if the parse succeeded false if the parse failed
+	 */
+	fun Int.Companion.TryParse(value: String): Boolean { // Companion is required to make TryParse Static
+		try {
+			value.toInt()
+			return true
+		} catch (nfe: NumberFormatException) {
+			return false
+		}
+	}
+
+	/**
+	 * Extension method for Long that safely tries to parse a long
+	 * @param value the value to parse
+	 * @return true if the parse succeeded false if the parse failed
+	 */
+	fun Long.Companion.TryParse(value: String): Boolean { // Companion is required to make TryParse Static
+		try {
+			value.toLong()
+			return true
+		} catch (nfe: NumberFormatException) {
+			return false
+		}
+	}
+
+	/**
+	 * Extension method for Short that safely tries to parse a short
+	 * @param value the value to parse
+	 * @return true if the parse succeeded false if the parse failed
+	 */
+	fun Short.Companion.TryParse(value: String): Boolean { // Companion is required to make TryParse Static
+		try {
+			value.toShort()
+			return true
+		} catch (nfe: NumberFormatException) {
+			return false
+		}
+	}
+
+	/**
+	 * Extension method for Byte that safely tries to parse a byte
+	 * @param value the value to parse
+	 * @return true if the parse succeeded false if the parse failed
+	 */
+	fun Byte.Companion.TryParse(value: String): Boolean { // Companion is required to make TryParse Static
+		try {
+			value.toByte()
+			return true
+		} catch (nfe: NumberFormatException) {
+			return false
+		}
+	}
+
+
+	/**
+	 * Extension method for Int that safely tries to decode a int
+	 * @param value the value to parse
+	 * @return true if the parse succeeded false if the decode failed
+	 */
+	fun Int.Companion.TryDecode(value: String): Boolean { // Companion is required to make TryDecode Static
+		try {
+			Integer.decode(value)
+			return true
+		} catch (nfe: NumberFormatException) {
+			return false
+		}
+	}
+
+	/**
+	 * Extension method for Long that safely tries to decode a long
+	 * @param value the value to parse
+	 * @return true if the parse succeeded false if the decode failed
+	 */
+	fun Long.Companion.TryDecode(value: String): Boolean { // Companion is required to make TryDecode Static
+		try {
+			java.lang.Long.decode(value)
+			return true
+		} catch (nfe: NumberFormatException) {
+			return false
+		}
+	}
+
+	/**
+	 * Extension method for Short that safely tries to decode a short
+	 * @param value the value to Decode
+	 * @param base the base of the number
+	 * @return true if the Decode succeeded false if the decode failed
+	 */
+	fun Short.Companion.TryDecode(value: String): Boolean { // Companion is required to make TryDecode Static
+		try {
+			java.lang.Short.decode(value)
+			return true
+		} catch (nfe: NumberFormatException) {
+			return false
+		}
+	}
+
+	/**
+	 * Extension method for Byte that safely tries to decode a byte
+	 * @param value the value to Decode
+	 * @param base the base of the number
+	 * @return true if the Decode succeeded false if the decode failed
+	 */
+	fun Byte.Companion.TryDecode(value: String): Boolean { // Companion is required to make TryDecode Static
+		try {
+			java.lang.Byte.decode(value)
+			return true
+		} catch (nfe: NumberFormatException) {
+			return false
+		}
+	}
 }
