@@ -27,6 +27,7 @@ class SyntaxTest -> {
       println("Hello World \"Escape Test!\" 'After Escaped Quotes'") // This is a comment
       let i -> int = 0
       var j -> int = i + j
+      let arr -> array[int] = array[int](16)
       if (i == 2) -> {
          println("i == 2")
       }
