@@ -84,7 +84,6 @@ class Lexer {
 					index++
 				}
 			} else if (currentToken.toString() == "/*") { // Ignore Multiline Comments
-				val start: Int = index
 				while ((index < sourceFile.length.toInt() - 1) &&
 					!(sourceFile.text[index] == '*' && sourceFile.text[index + 1] == '/')) {
 					currentToken = StringBuilder()
