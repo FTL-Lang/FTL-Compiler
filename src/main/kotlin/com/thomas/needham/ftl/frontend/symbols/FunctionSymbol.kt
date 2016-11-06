@@ -23,10 +23,12 @@
 */
 package com.thomas.needham.ftl.frontend.symbols
 
-import com.thomas.needham.ftl.frontend.symbols.ParameterSymbol
 import java.util.*
 
-
+/**
+ * This class represents a defined function within the compiler
+ * @author Thomas Needham
+ */
 class FunctionSymbol<ReturnType> : Symbol<ReturnType> {
 
 	/**
@@ -62,7 +64,12 @@ class FunctionSymbol<ReturnType> : Symbol<ReturnType> {
 	/**
 	 * List of parameters this function takes
 	 */
-	val parameters : List<ParameterSymbol<*>>
+	val parameters: List<ParameterSymbol<*>>
+
+	/**
+	 * List of local variables defined within this function
+	 */
+	val localVariables : List<VariableSymbol<*>>
 
 	/**
 	 * Constructor for function symbol
@@ -70,12 +77,13 @@ class FunctionSymbol<ReturnType> : Symbol<ReturnType> {
 	 * @param name the name of this symbol
 	 * @param value the value of this symbol
 	 * @param readOnly whether this symbol is read only
-	 * @param scope the scope tthat this symbol is defined in
+	 * @param scope the scope that this symbol is defined in
 	 * @param initialised whether this symbol has been initialised defaults to false
 	 * @param parameters the parameters of this function
+	 * @param localVariables List of local variables defined within this function
 	 */
-	constructor(id: UUID, name: String, value: ReturnType?, scope: Scope, readOnly: Boolean, initialised: Boolean,
-	            parameters: List<ParameterSymbol<*>> = listOf()) : super() {
+	constructor(id: UUID, name: String, value: ReturnType?, scope: Scope, readOnly: Boolean, initialised: Boolean = false,
+	            parameters: List<ParameterSymbol<*>> = listOf(), localVariables: List<VariableSymbol<*>> = listOf()) : super() {
 		this.id = id
 		this.name = name
 		this.value = value
@@ -83,6 +91,7 @@ class FunctionSymbol<ReturnType> : Symbol<ReturnType> {
 		this.readOnly = readOnly
 		this.initialised = initialised
 		this.parameters = parameters
+		this.localVariables = localVariables
 	}
 
 
@@ -92,13 +101,13 @@ class FunctionSymbol<ReturnType> : Symbol<ReturnType> {
 	 * @return A unique ID to represent a symbol
 	 */
 	override fun generateID(table: SymbolTable): UUID {
-		val symbols : List<Symbol<*>> = table.symbols.filter { e -> e is FunctionSymbol<*> }
-		var found : Boolean = false
-		var id : UUID = UUID.fromString("0".repeat(128))
-		while (!found){
+		val symbols: List<Symbol<*>> = table.symbols.filter { e -> e is FunctionSymbol<*> }
+		var found: Boolean = false
+		var id: UUID = UUID.fromString("0".repeat(128))
+		while (!found) {
 			id = UUID.randomUUID()
-			for(sym: Symbol<*> in symbols){
-				if(sym.id == id)
+			for (sym: Symbol<*> in symbols) {
+				if (sym.id == id)
 					found = true
 			}
 		}
@@ -111,14 +120,14 @@ class FunctionSymbol<ReturnType> : Symbol<ReturnType> {
 	 * @return Whether both symbols are equal
 	 */
 	override fun equals(other: Any?): Boolean {
-		if(other !is FunctionSymbol<*>?)
+		if (other !is FunctionSymbol<*>?)
 			return false
 		if (other === null)
 			return true
 		return this.id == other.id && this.name == other.name &&
 			this.value == other.value && this.scope == other.scope &&
 			this.readOnly == other.readOnly && this.initialised == other.initialised &&
-			this.parameters.containsAll(other.parameters)
+			this.parameters.containsAll(other.parameters) && this.localVariables.containsAll(other.localVariables)
 	}
 
 	/**
@@ -134,8 +143,7 @@ class FunctionSymbol<ReturnType> : Symbol<ReturnType> {
 		result = 31 * result + readOnly.hashCode()
 		result = 31 * result + initialised.hashCode()
 		result = 31 * result + parameters.hashCode()
+		result = 31 * result + localVariables.hashCode()
 		return result
 	}
-
-
 }
