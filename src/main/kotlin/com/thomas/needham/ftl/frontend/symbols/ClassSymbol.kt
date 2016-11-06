@@ -61,19 +61,19 @@ class ClassSymbol<Type> : Symbol<Type> {
 	override var initialised: Boolean
 
 	/**
-	 * List of inner classes defined within this class
+	 * MutableList of inner classes defined within this class
 	 */
-	val innerClasses : List<ClassSymbol<*>>
+	val innerClasses : MutableList<ClassSymbol<*>>
 
 	/**
-	 * List of fields defined in this class
+	 * MutableList of fields defined in this class
 	 */
-	val fields : List<VariableSymbol<*>>
+	val fields : MutableList<VariableSymbol<*>>
 
 	/**
-	 * List of functions defined in this class
+	 * MutableList of functions defined in this class
 	 */
-	val functions : List<FunctionSymbol<*>>
+	val functions : MutableList<FunctionSymbol<*>>
 
 	/**
 	 * Constructor for class symbol
@@ -83,13 +83,13 @@ class ClassSymbol<Type> : Symbol<Type> {
 	 * @param readOnly whether this symbol is read only
 	 * @param scope the scope tthat this symbol is defined in
 	 * @param initialised whether this symbol has been initialised defaults to false
-	 * @param innerClasses List of inner classes declared within this class
-	 * @param fields List of global fields defined within this class
-	 * @param functions List of functions defined in this class
+	 * @param innerClasses MutableList of inner classes declared within this class
+	 * @param fields MutableList of global fields defined within this class
+	 * @param functions MutableList of functions defined in this class
 	 */
 	constructor(id: UUID, name: String, value: Type?, readOnly: Boolean, scope: Scope, initialised: Boolean = false,
-	            innerClasses: List<ClassSymbol<*>> = listOf(), fields: List<VariableSymbol<*>> = listOf(),
-	            functions: List<FunctionSymbol<*>> = listOf()){
+	            innerClasses: MutableList<ClassSymbol<*>> = mutableListOf(), fields: MutableList<VariableSymbol<*>> = mutableListOf(),
+	            functions: MutableList<FunctionSymbol<*>> = mutableListOf()){
 		this.id = id
 		this.name = name
 		this.value = value
@@ -107,7 +107,7 @@ class ClassSymbol<Type> : Symbol<Type> {
 	 * @return A unique ID to represent a symbol
 	 */
 	override fun generateID(table: SymbolTable): UUID {
-		val symbols : List<Symbol<*>> = table.symbols.filter { e -> e is ClassSymbol<*> }
+		val symbols : MutableList<Symbol<*>> = table.symbols.filter { e -> e is ClassSymbol<*> }.toMutableList()
 		var found : Boolean = false
 		var id : UUID = UUID.fromString("0".repeat(128))
 		while (!found){

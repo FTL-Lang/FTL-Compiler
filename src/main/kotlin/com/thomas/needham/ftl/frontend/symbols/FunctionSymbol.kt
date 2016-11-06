@@ -62,14 +62,14 @@ class FunctionSymbol<ReturnType> : Symbol<ReturnType> {
 	override var initialised: Boolean
 
 	/**
-	 * List of parameters this function takes
+	 * MutableList of parameters this function takes
 	 */
-	val parameters: List<ParameterSymbol<*>>
+	val parameters: MutableList<ParameterSymbol<*>>
 
 	/**
-	 * List of local variables defined within this function
+	 * MutableList of local variables defined within this function
 	 */
-	val localVariables : List<VariableSymbol<*>>
+	val localVariables : MutableList<VariableSymbol<*>>
 
 	/**
 	 * Constructor for function symbol
@@ -80,10 +80,10 @@ class FunctionSymbol<ReturnType> : Symbol<ReturnType> {
 	 * @param scope the scope that this symbol is defined in
 	 * @param initialised whether this symbol has been initialised defaults to false
 	 * @param parameters the parameters of this function
-	 * @param localVariables List of local variables defined within this function
+	 * @param localVariables MutableList of local variables defined within this function
 	 */
 	constructor(id: UUID, name: String, value: ReturnType?, scope: Scope, readOnly: Boolean, initialised: Boolean = false,
-	            parameters: List<ParameterSymbol<*>> = listOf(), localVariables: List<VariableSymbol<*>> = listOf()) : super() {
+	            parameters: MutableList<ParameterSymbol<*>> = mutableListOf(), localVariables: MutableList<VariableSymbol<*>> = mutableListOf()) : super() {
 		this.id = id
 		this.name = name
 		this.value = value
@@ -101,7 +101,7 @@ class FunctionSymbol<ReturnType> : Symbol<ReturnType> {
 	 * @return A unique ID to represent a symbol
 	 */
 	override fun generateID(table: SymbolTable): UUID {
-		val symbols: List<Symbol<*>> = table.symbols.filter { e -> e is FunctionSymbol<*> }
+		val symbols: MutableList<Symbol<*>> = table.symbols.filter { e -> e is FunctionSymbol<*> }.toMutableList()
 		var found: Boolean = false
 		var id: UUID = UUID.fromString("0".repeat(128))
 		while (!found) {

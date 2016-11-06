@@ -44,19 +44,19 @@ class TypeInfo<T : Class<*>> : Type {
 	val name : String
 
 	/**
-	 * List of superclasses and superinterfaces of this type
+	 * MutableList of superclasses and superinterfaces of this type
 	 */
-	val superTypes : List<Class<out Any?>>?
+	val superTypes : MutableList<Class<out Any?>>?
 
 	/**
-	 * List of any enclosing types defined within this type
+	 * MutableList of any enclosing types defined within this type
 	 */
-	val enclosingTypes : List<Class<out Any?>>?
+	val enclosingTypes : MutableList<Class<out Any?>>?
 
 	/**
-	 * List of any generic type arguments passed to this type
+	 * MutableList of any generic type arguments passed to this type
 	 */
-	val typeArguemnts : List<TypeVariable<out Class<out Any?>?>?>?
+	val typeArguemnts : MutableList<TypeVariable<out Class<out Any?>?>?>?
 
 	/**
 	 * Constructor for TypeInfo
@@ -65,9 +65,9 @@ class TypeInfo<T : Class<*>> : Type {
 	constructor(classinfo: T){
 		this.classinfo = classinfo
 		this.name = classinfo.name
-		this.superTypes = listOf(classinfo.superclass, *classinfo.interfaces)
-		this.enclosingTypes = classinfo.declaredClasses.asList()
-		this.typeArguemnts = classinfo.typeParameters.asList()
+		this.superTypes = mutableListOf(classinfo.superclass, *classinfo.interfaces)
+		this.enclosingTypes = classinfo.declaredClasses.toMutableList()
+		this.typeArguemnts = classinfo.typeParameters.toMutableList()
 
 	}
 }

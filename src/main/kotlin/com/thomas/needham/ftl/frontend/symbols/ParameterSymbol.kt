@@ -94,7 +94,7 @@ class ParameterSymbol<Type> : Symbol<Type> {
 	 * @return A unique ID to represent a symbol
 	 */
 	override fun generateID(table: SymbolTable): UUID {
-		val symbols : List<Symbol<*>> = table.symbols.filter { e -> e is ParameterSymbol<*> }
+		val symbols : MutableList<Symbol<*>> = table.symbols.filter { e -> e is ParameterSymbol<*> }.toMutableList()
 		var found : Boolean = false
 		var id : UUID = UUID.fromString("0".repeat(128))
 		while (!found){

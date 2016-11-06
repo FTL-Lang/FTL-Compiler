@@ -61,9 +61,9 @@ class InterfaceSymbol<Type> : Symbol<Type> {
 	override var initialised: Boolean
 
 	/**
-	 * List of functions defined within this interface
+	 * MutableList of functions defined within this interface
 	 */
-	val functions : List<FunctionSymbol<*>>
+	val functions : MutableList<FunctionSymbol<*>>
 
 	/**
 	 * Constructor for variable symbol
@@ -73,10 +73,10 @@ class InterfaceSymbol<Type> : Symbol<Type> {
 	 * @param readOnly whether this symbol is read only
 	 * @param scope the scope tthat this symbol is defined in
 	 * @param initialised whether this symbol has been initialised defaults to false
-	 * @param functions List of functions defined in this interface
+	 * @param functions MutableList of functions defined in this interface
 	 */
 	constructor(id: UUID, name: String, value: Type?, readOnly: Boolean, scope: Scope, initialised: Boolean = false,
-	            functions: List<FunctionSymbol<*>> = listOf()){
+	            functions: MutableList<FunctionSymbol<*>> = mutableListOf()){
 		this.id = id
 		this.name = name
 		this.value = value
@@ -92,7 +92,7 @@ class InterfaceSymbol<Type> : Symbol<Type> {
 	 * @return A unique ID to represent a symbol
 	 */
 	override fun generateID(table: SymbolTable): UUID {
-		val symbols : List<Symbol<*>> = table.symbols.filter { e -> e is InterfaceSymbol<*> }
+		val symbols : MutableList<Symbol<*>> = table.symbols.filter { e -> e is InterfaceSymbol<*> }.toMutableList()
 		var found : Boolean = false
 		var id : UUID = UUID.fromString("0".repeat(128))
 		while (!found){

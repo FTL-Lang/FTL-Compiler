@@ -29,7 +29,7 @@ package com.thomas.needham.ftl.frontend.symbols
  */
 class SymbolTable {
 	/**
-	 * List of symbols defined in the symbol table
+	 * MutableList of symbols defined in the symbol table
 	 */
 	val symbols : MutableList<Symbol<*>>
 
@@ -51,10 +51,10 @@ class SymbolTable {
 	/**
 	 * Function to get all symbols in the passed scope
 	 * @param scope Scope to get all symbols from
-	 * @return A list of all symbols defined in the passed scope
+	 * @return A MutableList of all symbols defined in the passed scope
 	 */
-	fun getAllSymbolsInScope(scope: Scope) : List<Symbol<*>>{
-		return symbols.filter { e -> e.scope == scope }
+	fun getAllSymbolsInScope(scope: Scope) : MutableList<Symbol<*>>{
+		return symbols.filter { e -> e.scope == scope }.toMutableList()
 	}
 
 	/**
@@ -66,7 +66,7 @@ class SymbolTable {
 	fun isDefinedInScope(symbol: Symbol<*>, scope: Scope) : Boolean {
 		var s : Scope? = scope
 		while (s != null){
-			val definedSymbols : List<Symbol<*>> = getAllSymbolsInScope(s)
+			val definedSymbols : MutableList<Symbol<*>> = getAllSymbolsInScope(s)
 			if(definedSymbols.any { e -> e == symbol && e.scope == scope })
 				return true
 			s = s.parent

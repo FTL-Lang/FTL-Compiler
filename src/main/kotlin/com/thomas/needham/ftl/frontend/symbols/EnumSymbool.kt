@@ -60,9 +60,9 @@ class EnumSymbool<Type> : Symbol<Type> {
 	override var initialised: Boolean
 
 	/**
-	 * List of functions defined within this interface
+	 * MutableList of functions defined within this interface
 	 */
-	val fields : List<VariableSymbol<*>>
+	val fields : MutableList<VariableSymbol<*>>
 
 	/**
 	 * Constructor for variable symbol
@@ -72,10 +72,10 @@ class EnumSymbool<Type> : Symbol<Type> {
 	 * @param readOnly whether this symbol is read only
 	 * @param scope the scope tthat this symbol is defined in
 	 * @param initialised whether this symbol has been initialised defaults to false
-	 * @param fields List of fields defined in this enum
+	 * @param fields MutableList of fields defined in this enum
 	 */
 	constructor(id: UUID, name: String, value: Type?, readOnly: Boolean, scope: Scope, initialised: Boolean = false,
-	            fields: List<VariableSymbol<*>> = listOf()){
+	            fields: MutableList<VariableSymbol<*>> = mutableListOf()){
 		this.id = id
 		this.name = name
 		this.value = value
@@ -91,7 +91,7 @@ class EnumSymbool<Type> : Symbol<Type> {
 	 * @return A unique ID to represent a symbol
 	 */
 	override fun generateID(table: SymbolTable): UUID {
-		val symbols : List<Symbol<*>> = table.symbols.filter { e -> e is EnumSymbool<*> }
+		val symbols : MutableList<Symbol<*>> = table.symbols.filter { e -> e is EnumSymbool<*> }.toMutableList()
 		var found : Boolean = false
 		var id : UUID = UUID.fromString("0".repeat(128))
 		while (!found){

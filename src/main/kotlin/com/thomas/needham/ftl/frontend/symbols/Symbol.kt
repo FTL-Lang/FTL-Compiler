@@ -78,7 +78,7 @@ abstract class Symbol<Type> {
 	{
 		var s : Scope? = scope
 		while(s != null){
-			val symbolsinScope : List<Symbol<*>> = table.symbols.filter { e -> e.scope == scope }
+			val symbolsinScope : MutableList<Symbol<*>> = table.symbols.filter { e -> e.scope == scope }.toMutableList()
 			if(symbolsinScope.any { e -> e.name == symbol.name })
 				return true
 			s = s.parent
