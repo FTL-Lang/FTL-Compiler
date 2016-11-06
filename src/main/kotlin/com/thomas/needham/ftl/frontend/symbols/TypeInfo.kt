@@ -29,6 +29,7 @@ import java.lang.reflect.TypeVariable
 /**
  * This class represents a symbols type
  * @param T the Type that this info should represent
+ * @author Tom Needham
  */
 class TypeInfo<T : Class<*>> : Type {
 
@@ -58,7 +59,8 @@ class TypeInfo<T : Class<*>> : Type {
 	val typeArguemnts : List<TypeVariable<out Class<out Any?>?>?>?
 
 	/**
-	 * C
+	 * Constructor for TypeInfo
+	 * @param T the type that this instance represents
 	 */
 	constructor(classinfo: T){
 		this.classinfo = classinfo

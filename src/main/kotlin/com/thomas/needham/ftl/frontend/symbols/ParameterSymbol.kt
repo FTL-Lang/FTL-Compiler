@@ -26,6 +26,10 @@ package com.thomas.needham.ftl.frontend.symbols
 import com.thomas.needham.ftl.frontend.symbols.*
 import java.util.*
 
+/**
+ * This class represents a defined parameter within the compiler
+ * @author Thomas Needham
+ */
 class ParameterSymbol<Type> : Symbol<Type> {
 	/**
 	 * Unique identifier to represent this symbol
@@ -68,7 +72,7 @@ class ParameterSymbol<Type> : Symbol<Type> {
 	 * @param name the name of this symbol
 	 * @param value the value of this symbol
 	 * @param readOnly whether this symbol is read only
-	 * @param scope the scope tthat this symbol is defined in
+	 * @param scope the scope that this symbol is defined in
 	 * @param initialised whether this symbol has been initialised defaults to false
 	 * @param function the function this parameter is passed to
 	 */

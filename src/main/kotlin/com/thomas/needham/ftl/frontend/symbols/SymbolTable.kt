@@ -28,20 +28,41 @@ package com.thomas.needham.ftl.frontend.symbols
  * @author Thomas Needham
  */
 class SymbolTable {
+	/**
+	 * List of symbols defined in the symbol table
+	 */
 	val symbols : MutableList<Symbol<*>>
 
+	/**
+	 * Default Constructor for SymbolTable
+	 */
 	constructor(){
 		this.symbols = mutableListOf()
 	}
 
+	/**
+	 * Constructor for symbol table to initialise with symbols
+	 * @param symbols the symbols to add to the symbol table
+	 */
 	constructor(symbols: MutableList<Symbol<*>>){
 		this.symbols = symbols
 	}
 
+	/**
+	 * Function to get all symbols in the passed scope
+	 * @param scope Scope to get all symbols from
+	 * @return A list of all symbols defined in the passed scope
+	 */
 	fun getAllSymbolsInScope(scope: Scope) : List<Symbol<*>>{
 		return symbols.filter { e -> e.scope == scope }
 	}
 
+	/**
+	 * Function to return whether a symbol is defined in the passed scope
+	 * @param symbol Symbol to look for in the passed scope
+	 * @param scope The scope to search for the current symbol
+	 * @return Whether the passed symbol was defined in the passed scope
+	 */
 	fun isDefinedInScope(symbol: Symbol<*>, scope: Scope) : Boolean {
 		var s : Scope? = scope
 		while (s != null){

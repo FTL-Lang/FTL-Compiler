@@ -24,7 +24,10 @@
 package com.thomas.needham.ftl.frontend.symbols
 
 import java.util.*
-
+/**
+ * This class represents a defined variable within the compiler
+ * @author Thomas Needham
+ */
 class VariableSymbol<Type> : Symbol<Type> {
 	/**
 	 * Unique identifier to represent this symbol
