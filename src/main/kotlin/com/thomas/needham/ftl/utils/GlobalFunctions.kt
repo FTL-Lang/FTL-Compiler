@@ -26,6 +26,8 @@ package com.thomas.needham.ftl.utils
 import com.thomas.needham.ftl.utils.Tuple3
 import java.io.*
 
+typealias EvaluateStringParams = Tuple3<Int, StringBuilder, Array<Char>>
+
 /**
  * Static object containing useful utility functions which are accessible from the global scope
  */
@@ -40,8 +42,6 @@ object GlobalFunctions {
 	@JvmStatic fun array2dOfFloat(sizeOuter: Int, sizeInner: Int): Array<FloatArray> = Array(sizeOuter) { FloatArray(sizeInner) }
 	@JvmStatic fun array2dOfDouble(sizeOuter: Int, sizeInner: Int): Array<DoubleArray> = Array(sizeOuter) { DoubleArray(sizeInner) }
 	@JvmStatic fun array2dOfBoolean(sizeOuter: Int, sizeInner: Int): Array<BooleanArray> = Array(sizeOuter) { BooleanArray(sizeInner) }
-
-	typealias EvaluateStringParams = Tuple3<Int, StringBuilder, Array<Char>>
 
 	val CONSOLE_COLOUR_RESET = "\u001B[0m"
 	val CONSOLE_COLOUR_BLACK = "\u001B[30m"

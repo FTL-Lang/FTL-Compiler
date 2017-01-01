@@ -24,10 +24,10 @@
 package com.thomas.needham.ftl.frontend.lexer
 
 import com.thomas.needham.ftl.utils.Logger
-import com.thomas.needham.ftl.utils.GlobalFunctions.EvaluateStringParams
 import com.thomas.needham.ftl.utils.SourceFile
 import com.thomas.needham.ftl.frontend.lexer.Token
 import com.thomas.needham.ftl.frontend.lexer.TokenRegistry
+import com.thomas.needham.ftl.utils.EvaluateStringParams
 
 /**
  * This class represents the lexer which splits up source code
