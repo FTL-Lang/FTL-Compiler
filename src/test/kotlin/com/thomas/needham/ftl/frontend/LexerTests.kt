@@ -25,7 +25,9 @@ package com.thomas.needham.ftl.frontend
 
 import com.thomas.needham.ftl.frontend.lexer.Lexer
 import com.thomas.needham.ftl.utils.SourceFile
-import io.kotlintest.specs.FeatureSpec
+import io.kotest.core.spec.style.FeatureSpec
+import io.kotest.matchers.comparables.shouldBeEqualComparingTo
+import io.kotest.matchers.shouldBe
 import java.io.File
 
 class LexerTests : FeatureSpec() {
@@ -68,7 +70,7 @@ class LexerTests : FeatureSpec() {
 			scenario("Should Print The Following Tokens ${correctTokens.forEach { println(it) }}") {
 				val lexer: Lexer = Lexer(SourceFile(File("testdata/lexer/correct.warp")))
 				lexer.tokeniseSourceCode()
-				lexer.printTokens().forEachIndexed { index, item -> item.shouldEqual(correctTokens[index]) }
+				lexer.printTokens().forEachIndexed { index, item -> item.shouldBeEqualComparingTo(correctTokens[index]) }
 			}
 		}
 	}
