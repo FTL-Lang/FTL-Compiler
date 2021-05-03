@@ -28,7 +28,8 @@ import com.thomas.needham.ftl.frontend.lexer.Lexer
 import com.thomas.needham.ftl.frontend.lexer.Token
 import com.thomas.needham.ftl.frontend.lexer.TokenRegistry
 import com.thomas.needham.ftl.utils.SourceFile
-import io.kotlintest.specs.FeatureSpec
+import io.kotest.core.spec.style.FeatureSpec
+import io.kotest.matchers.shouldBe
 import java.io.File
 
 class TokenRegistryTests : FeatureSpec() {
